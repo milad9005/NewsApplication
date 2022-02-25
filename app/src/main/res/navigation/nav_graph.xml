@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragNews">
+
+    <fragment
+        android:id="@+id/fragNews"
+        android:name="com.example.newsapp.ui.FragNews"
+        android:label="frag_news"
+        tools:layout="@layout/frag_news" />
+    <fragment
+        android:id="@+id/fragFav"
+        android:name="com.example.newsapp.ui.FragFav"
+        android:label="frag_fav"
+        tools:layout="@layout/frag_fav" />
+</navigation>
