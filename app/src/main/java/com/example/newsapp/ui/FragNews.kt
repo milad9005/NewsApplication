@@ -41,7 +41,7 @@ class FragNews : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-
+        viewModel.getNews()
 
         viewModel.items.observe(viewLifecycleOwner, Observer {
             pagingAdapter.submitData(lifecycle, it)

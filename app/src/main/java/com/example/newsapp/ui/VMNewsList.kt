@@ -8,6 +8,7 @@ import com.example.newsapp.common.Resource
 import com.example.newsapp.data.remote.GetNewsParam
 import com.example.newsapp.data.remote.NewsList
 import com.example.newsapp.domain.use_case.get_news.GetNewsUseCase
+import com.example.newsapp.ui.mapper.NewsListPresentMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VMNewsList @Inject constructor(
-    private val getNewsUseCase: GetNewsUseCase
+    private val getNewsUseCase: GetNewsUseCase,
+    private val newsListPresentMapper: NewsListPresentMapper
 ) : ViewModel() {
 
     companion object {
@@ -33,7 +35,9 @@ class VMNewsList @Inject constructor(
 
         val loadedItems = Pager(PagingConfig(PER_PAGE)) {
             GetNewsPagingSource(
-              ::loadNewsInPage
+              ::loadNewsInPage,
+                newsListPresentMapper,
+                ::onClick
             )
         }.liveData.cachedIn(viewModelScope)
         items.addSource(loadedItems) {
@@ -41,6 +45,10 @@ class VMNewsList @Inject constructor(
         }
     }
 
+
+    fun onClick(id:Int?){
+
+    }
 
     private suspend fun loadNewsInPage(page: Int): Resource<NewsList> {
         return getNewsUseCase.buildUseCase(
